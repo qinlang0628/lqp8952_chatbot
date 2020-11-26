@@ -1,0 +1,1 @@
+Download the trained model in this [Google Drive Link](https://drive.google.com/drive/folders/1k_PawTC_hLQ0RFwuzSTxs16VfBdkriTY?usp=sharing), unzip and put the models under this directory. Change the model used in the ```/script/predict.py``` to adjust to the model you use.
