@@ -10,6 +10,8 @@ Under the main directory, run the following command to install the required pack
 pip3 install -r requirements.txt
 ```
 
+Download the trained model in this [Google Drive Link](https://drive.google.com/drive/folders/1k_PawTC_hLQ0RFwuzSTxs16VfBdkriTY?usp=sharing), unzip and put the models under ```/model``` directory.
+
 ## Usage
 To access the webapp, run the following command in the main directory
 
