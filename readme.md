@@ -19,12 +19,13 @@ To test the REST API, run the following command in the main directory
 python3 api.py
 ```
 
-The run the following command in python
+The run the following command in python, replace the ```host``` variable to your host address, and ```message``` variable to the input text you want to test.
 
 ```python
 import requests
 message = "hi"
-url = "http://127.0.0.1:5000/get_response?msg={}".format(message)
+host = ""
+url = "http://{}/get_response?msg={}".format(host, message)
 response = requests.get(url)
 print(response.json())
 ```
