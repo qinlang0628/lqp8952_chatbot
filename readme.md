@@ -10,15 +10,33 @@ Under the main directory, run the following command to install the required pack
 pip3 install -r requirements.txt
 ```
 
-Download the trained model in this [Google Drive Link](https://drive.google.com/drive/folders/1k_PawTC_hLQ0RFwuzSTxs16VfBdkriTY?usp=sharing), unzip and put the models under ```/model``` directory.
+Download the trained model in this [Google Drive Link](https://drive.google.com/drive/folders/1k_PawTC_hLQ0RFwuzSTxs16VfBdkriTY?usp=sharing), unzip and put the models under ```/model``` directory. Change the model used in the ```/script/predict.py``` to adjust to the model you use.
 
-## Usage
+## API
+To test the REST API, run the following command in the main directory
+
+```bash
+python3 api.py
+```
+
+The run the following command in python
+
+```python
+import requests
+message = "hi"
+url = "http://127.0.0.1:5000/get_response?msg={}".format(message)
+response = requests.get(url)
+print(response.json())
+```
+
+## Web App
 To access the webapp, run the following command in the main directory
 
 ```bash
 python3 api.py
 ```
 Copy and paste the web url into your browser to access the webapp.
+
 
 
 ## Training

@@ -2,10 +2,10 @@ from transformers import AutoModelWithLMHead, AutoTokenizer
 import torch
 
 tokenizer = AutoTokenizer.from_pretrained('microsoft/DialoGPT-small')
-# model = AutoModelWithLMHead.from_pretrained('microsoft/DialoGPT-small')
+model = AutoModelWithLMHead.from_pretrained('microsoft/DialoGPT-small')
 # model = AutoModelWithLMHead.from_pretrained('model/output_animation')
 # tokenizer = AutoModelWithLMHead.from_pretrained('model/output_animation')
-model = AutoModelWithLMHead.from_pretrained('model/output_annie')
+# model = AutoModelWithLMHead.from_pretrained('model/output_annie')
 # tokenizer = AutoTokenizer.from_pretrained('model/output_annie')
 # model = AutoModelWithLMHead.from_pretrained('model/output_all')
 # tokenizer = AutoModelWithLMHead.from_pretrained('model/output_all')

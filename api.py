@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 from script.predict import get_response, re_encode
+from flask import json
+
 import string
 
 app = Flask(__name__)
@@ -39,7 +41,13 @@ def get_bot_response():
     print("++++ chat history ++++", chat_history_encoded)
     chat_history.append({"name": "user", "text": input})
     chat_history.append({"name": "bot", "text": message})
-    return message
+
+    response = app.response_class(
+        response=json.dumps(message),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 @app.route("/get_reset", methods=['GET', 'POST'])
 def get_reset():
