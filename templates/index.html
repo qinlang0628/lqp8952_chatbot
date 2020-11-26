@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <!-- <link rel="shortcut icon" href="/static/favocon.ico" /> -->
+    <!-- <meta http-equiv="refresh" content="5" > -->
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Chat bot</h1>
+    <!-- <h3>A web implementation of <a href="https://github.com/gunthercox/ChatterBot">ChatterBot</a> using Flask.</h3> -->
+    <div>
+      <div id="chatbox">
+        <p class="botText"><span>Hi! Talk to me please.</span></p>
+      </div>
+      <div id="userInput">
+        <input id="textInput" type="text" name="msg" placeholder="Message">
+        <input id="buttonInput" type="submit" value="Send">
+        <input id="buttonReset" type="submit" value="Reset">
+      </div>
+
+      <!-- append chat history -->
+      <script>
+        var parsed_history = JSON.parse('{{history | tojson}}');
+        
+        for (var i = 0; i < parsed_history.length; i++) {
+            var rawText = parsed_history[i].text;
+            var identity = parsed_history[i].name;
+            if (identity == "bot"){
+              console.log("append bot");
+              var botHtml = '<p class="botText"><span>' + rawText + '</span></p>';
+              $("#chatbox").append(botHtml);
+            } else {
+              console.log("append user");
+              var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+              $("#chatbox").append(userHtml);
+            }
+        }
+      </script>
+
+      <!-- get response -->
+      <script>
+        function getBotResponse() {
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          $.get("/get_response", { msg: rawText }).done(function(data) {
+            var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+            $("#chatbox").append(botHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          });
+        }
+        $("#textInput").keypress(function(e) {
+            if ((e.which == 13) && document.getElementById("textInput").value != "" ){
+                getBotResponse();
+            }
+        });
+        $("#buttonInput").click(function() {
+            if (document.getElementById("textInput").value != "") {
+                getBotResponse();
+            }
+        })
+      </script>
+      
+      <script type=text/javascript>
+        $(function() {
+          $('#buttonReset').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/get_reset',
+              function(data) {
+            });
+              setTimeout(function(){ 
+                window.location.reload();
+              }, 100)
+            
+            return false;
+          });
+        });
+      </script>
+
+    </div>
+  </body>
+  
+</html>
